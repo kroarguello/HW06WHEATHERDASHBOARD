@@ -25,13 +25,10 @@
          <button id="buttonSearch" class="btn btn-info">Search</button>
      </div>
      <div  class="row">
-         <div id="cities" class="col-md-3">
-            <ul id="listcities" class="list-group list-group-flush">
-                <!--cities we are looking for-->
-              </ul>                   
+         <div id="cities" class="col-md-3">              
          </div>
          <div class="col-md-9">
-             <div id="currentCity" class="row">Please type a City</div>
+             <div id="currentCity">Please type a City</div>
              <div class="row"><h3>5 days Forecast</h3></div>
           
             
@@ -48,7 +45,7 @@
 <script>
         var today = moment().format('LLL');
         console.log(today);
-        var divP=$("cards-days");     
+        var divP=$("#cards-days");     
  
 // Search Button 
 $(document).on("click", "#buttonSearch", searchCity);
@@ -62,10 +59,14 @@ function searchCity(){
     }
     else{
     // Show in the list 
-    var liEl = $("<li>");
+    /*var liEl = $("<li>");
     liEl.addClass("list-group-item");
     $("#listcities").prepend(liEl);
-    liEl.text(cityL);
+    liEl.text(cityL);*/
+        var btn = $("<button>");
+        btn.addClass("btn btn-primary cities-btn");
+        btn.text(cityL);
+        $("#cities").prepend(btn);
 
          // *******divP.empty(); // donde lo pongo its not working    
     
