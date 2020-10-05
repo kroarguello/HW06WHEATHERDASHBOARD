@@ -26,13 +26,12 @@
      </div>
      <div  class="row">
          <div id="cities" class="col-md-3">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Current</li>
+            <ul id="listcities" class="list-group list-group-flush">
                 <!--cities we are looking for-->
               </ul>                   
          </div>
          <div class="col-md-9">
-             <div id="currentCity" class="row">Current city</div>
+             <div id="currentCity" class="row">Please type a City</div>
              <div class="row"><h3>5 days Forecast</h3></div>
           
             
@@ -80,31 +79,81 @@
 
 <script>
         var today = moment().format('LLL');
-        
-        var urlWeather = "api.openweathermap.org/data/2.5/weather?q=Austin,uk&APPID=99301d0cd337422b7e967fbf9be0bf70";
+       //        var urlWeather = "http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + "&appid=99301d0cd337422b7e967fbf9be0bf70";
         //var urlForecast = "api.openweathermap.org/data/2.5/forecast?q={Austin}&appid={99301d0cd337422b7e967fbf9be0bf70}";
         console.log(today);
      
-  $.ajax({
-         url : urlWeather,
-         method : "GET"}).
-         then (function(response){
-          console.log(response);
-         }); 
-
+ 
 // Search Button 
 $(document).on("click", "#buttonSearch", searchCity);
 
+
+//Searching City
 function searchCity(){
     var cityL = $("#citySearch").val();
     if (cityL == ""){
        alert("Please type a City");
     }
     else{
-    console.log(cityL);
+    // Show in the list 
+    var liEl = $("<li>");
+    liEl.addClass("list-group-item");
+    $("#listcities").prepend(liEl);
+    liEl.text(cityL);
+        
+    // clear Text area
+    $("#citySearch").val("");
+  
+    weatherCityDisplay();
+     
     }
+}
+
+//shows data for that city
+function weatherCityDisplay(){
+
+    var ciudad="austin";
+    var urlWeather = "http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + "&units=imperial&appid=99301d0cd337422b7e967fbf9be0bf70";
+
+$.ajax({         
+        url : urlWeather,
+         method : "GET"}).
+         then (function(response){
+       //look info
+        var nameCity = response.name;
+        var tempCity = response.main.temp;
+        var feelCity = response.main.feels_like;
+        var humidityCity = response.main.humidity;
+        var windCity = response.wind.speed;
+
+        var divEl = $("#currentCity"); 
+        //var cleanDiv = " ";
+
+        divEl.empty();
+
+
+        var nameC = $("<h1>").text(nameCity);
+        divEl.append(nameC);
+
+        var tempC = $("<p>").text("Temperature : " + tempCity + "F");
+        divEl.append(tempC);
+
+        var feelC = $("<p>").text("Feels Like  : " + feelCity + "F");
+        divEl.append(feelC);
+
+        var humidityC = $("<p>").text("Humidity  : " + humidityCity +"%");
+        divEl.append(humidityC);
+
+        var windC = $("<p>").text("wind : " + windCity + "m/h");
+        divEl.append(windC);
+
+          console.log(response);
+         });
+
 
 }
+
+
 </script>
     
     
