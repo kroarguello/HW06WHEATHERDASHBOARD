@@ -7,3 +7,10 @@
 .letter-card{
     font-size: small;
 }
+
+.cities-btn{
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(101, 137, 179);
+}
