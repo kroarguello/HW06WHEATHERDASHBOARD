@@ -45,7 +45,7 @@ function newCityDisplay(){
 //shows data for that city
 function weatherCityDisplay(city){
 
-    var urlWeather = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=99301d0cd337422b7e967fbf9be0bf70";
+    var urlWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=99301d0cd337422b7e967fbf9be0bf70";
 
 
 
@@ -97,7 +97,7 @@ $.ajax({
 // show Forecast of the city
     function weatherForecastDisplay(city){
              
-        var urlForecast = "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=99301d0cd337422b7e967fbf9be0bf70";
+        var urlForecast = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=99301d0cd337422b7e967fbf9be0bf70";
    $.ajax({
        url:urlForecast,
        method: "GET"})
@@ -116,7 +116,7 @@ $.ajax({
          var humWeather1 = response.list[i].main.humidity;
          var skyWeather1 = response.list[i].weather[0].main;
          var imgskyWeather1 = response.list[i].weather[0].icon;
-         var urlimgsky = "http://openweathermap.org/img/wn/"+imgskyWeather1+"@2x.png";
+         var urlimgsky = "https://openweathermap.org/img/wn/"+imgskyWeather1+"@2x.png";
 
 
         //Making Cards
